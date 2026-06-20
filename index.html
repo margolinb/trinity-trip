@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Trinity Trip">
+<title>Trinity River Vista — Trip Guide</title>
+<style>
+/* ─── Reset ─────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* ─── Tokens ─────────────────────────────────────── */
+:root{
+  --ink:     #1C1A15;
+  --forest:  #1E3A2A;
+  --forest-l:#2D5C3F;
+  --river:   #2F6690;
+  --river-l: #EAF3FB;
+  --parch:   #F5F0E8;
+  --parch-d: #EDE7D9;
+  --sand:    #C8A96E;
+  --sand-l:  #F7EDD8;
+  --rust:    #8B3A1A;
+  --rust-l:  #FDF0EA;
+  --muted:   #6B6455;
+  --white:   #FDFCF8;
+  --rule:    rgba(28,26,21,0.15);
+  --r:       5px;
+}
+
+/* ─── Base ───────────────────────────────────────── */
+body{
+  font-family: Georgia,'Times New Roman',serif;
+  font-size:16px; line-height:1.7;
+  background:var(--parch);
+  color:var(--ink);
+  padding-bottom:80px;
+}
+p{margin-bottom:.75em}
+strong{font-weight:700}
+
+/* ─── Offline banner ─────────────────────────────── */
+.offline-bar{
+  background:var(--forest);
+  color:rgba(255,255,255,.7);
+  text-align:center;
+  font-family:system-ui,sans-serif;
+  font-size:11px; letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:6px 16px;
+}
+.offline-bar b{color:var(--sand)}
+
+/* ─── Hero ───────────────────────────────────────── */
+.hero{
+  position:relative; overflow:hidden;
+  height:72vw; max-height:420px; min-height:260px;
+}
+.hero-img{
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 60%;
+  display:block;
+}
+.hero-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.05) 0%,
+    rgba(0,0,0,.25) 50%,
+    rgba(0,0,0,.72) 100%);
+}
+.hero-text{
+  position:absolute; bottom:0; left:0; right:0;
+  padding:20px 20px 24px;
+  color:#fff;
+}
+.hero-eyebrow{
+  font-family:system-ui,sans-serif;
+  font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--sand); margin-bottom:6px;
+}
+.hero-title{
+  font-size:clamp(24px,6vw,34px);
+  font-weight:normal; line-height:1.15;
+  margin-bottom:4px;
+}
+.hero-sub{
+  font-style:italic; font-size:14px;
+  color:rgba(255,255,255,.8);
+  margin-bottom:14px;
+}
+.hero-pills{
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.hero-pill{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:20px;
+  padding:3px 10px;
+  font-family:system-ui,sans-serif;
+  font-size:11px; font-weight:600;
+  color:#fff;
+}
+.hero-pill span{color:var(--sand); margin-right:4px}
+
+/* ─── Sticky nav ─────────────────────────────────── */
+.nav{
+  position:sticky; top:0; z-index:100;
+  background:var(--forest);
+  border-bottom:2px solid var(--sand);
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.nav::-webkit-scrollbar{display:none}
+.nav-inner{display:flex; padding:0 8px; min-width:max-content}
+.nav-a{
+  display:flex; flex-direction:column; align-items:center;
+  padding:7px 13px;
+  color:rgba(255,255,255,.55);
+  text-decoration:none;
+  font-family:system-ui,sans-serif;
+  font-size:9.5px; letter-spacing:.04em; text-transform:uppercase;
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+  white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
+}
+.nav-a .e{font-size:15px; margin-bottom:1px}
+.nav-a:hover,.nav-a.active{color:var(--sand); border-bottom-color:var(--sand)}
+
+/* ─── Page layout ────────────────────────────────── */
+.page{max-width:600px; margin:0 auto; padding:0 18px}
+
+/* ─── Chapter headers ────────────────────────────── */
+.chapter{
+  margin-top:36px; margin-bottom:20px;
+  border-top:1px solid var(--rule);
+  padding-top:20px;
+}
+.chapter-eyebrow{
+  font-family:system-ui,sans-serif;
+  font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--sand);
+  margin-bottom:6px;
+}
+.chapter h2{
+  font-size:clamp(22px,5vw,28px);
+  font-weight:normal; color:var(--forest);
+  line-height:1.2;
+}
+.chapter-intro{
+  font-style:italic; font-size:15px;
+  color:var(--muted); margin-top:6px;
+  line-height:1.6;
+}
+
+/* ─── Section subheadings ────────────────────────── */
+h3.sub{
+  font-size:17px; font-weight:normal;
+  color:var(--forest-l);
+  margin:22px 0 10px;
+  padding-bottom:5px;
+  border-bottom:1px solid var(--rule);
+}
+
+/* ─── Inline photos ──────────────────────────────── */
+.photo-wrap{
+  margin:16px -18px;
+  position:relative; overflow:hidden;
+}
+.photo-wrap img{
+  width:100%; display:block;
+  max-height:220px; object-fit:cover;
+  object-position:center;
+}
+.photo-caption{
+  font-family:system-ui,sans-serif;
+  font-size:10.5px; color:var(--muted);
+  font-style:italic;
+  padding:5px 18px;
+  background:var(--parch-d);
+  text-align:center;
+}
+.photo-pair{display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:16px -18px}
+.photo-pair img{width:100%; height:140px; object-fit:cover; display:block}
+
+/* ─── Field-note callouts ────────────────────────── */
+.field-note{
+  margin:14px 0;
+  padding:12px 14px 12px 16px;
+  border-left:3px solid var(--sand);
+  background:var(--sand-l);
+  font-size:13.5px; line-height:1.6;
+  color:var(--ink);
+  border-radius:0 var(--r) var(--r) 0;
+}
+.field-note .label{
+  font-family:system-ui,sans-serif;
+  font-size:9px; letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sand); font-weight:700;
+  display:block; margin-bottom:4px;
+}
+.caution{
+  border-left-color:var(--rust);
+  background:var(--rust-l);
+}
+.caution .label{color:var(--rust)}
+.river-note{
+  border-left-color:var(--river);
+  background:var(--river-l);
+}
+.river-note .label{color:var(--river)}
+
+/* ─── Quick-ref table ────────────────────────────── */
+.ref-table{width:100%; border-collapse:collapse; font-size:13.5px}
+.ref-table tr:nth-child(odd) td{background:var(--parch-d)}
+.ref-table tr:nth-child(even) td{background:var(--white)}
+.ref-table td{padding:8px 10px; vertical-align:top; border-bottom:1px solid var(--rule)}
+.ref-table td:first-child{
+  font-family:system-ui,sans-serif;
+  font-size:10px; text-transform:uppercase; letter-spacing:.05em;
+  font-weight:700; color:var(--forest);
+  white-space:nowrap; width:100px;
+  padding-top:10px;
+}
+
+/* ─── Accordion cards ────────────────────────────── */
+.cards{display:flex; flex-direction:column; gap:10px; margin:12px 0}
+.card{
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:var(--r);
+  overflow:hidden;
+}
+.card-hd{
+  display:flex; align-items:center; gap:10px;
+  padding:11px 13px;
+  background:var(--forest);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.card-tag{
+  background:var(--sand);
+  color:var(--forest);
+  font-family:system-ui,sans-serif;
+  font-size:8.5px; font-weight:800;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:2px 7px; border-radius:3px;
+  white-space:nowrap; flex-shrink:0;
+}
+.card-tag.rust{background:var(--rust); color:#fff}
+.card-tag.river{background:var(--river); color:#fff}
+.card-title{
+  flex:1; color:#fff;
+  font-family:Georgia,serif;
+  font-size:14.5px; font-weight:normal;
+  line-height:1.3;
+}
+.card-arrow{
+  color:rgba(255,255,255,.45);
+  font-size:11px; flex-shrink:0;
+  transition:transform .2s;
+}
+.card.open .card-arrow{transform:rotate(180deg)}
+.card-body{
+  padding:14px;
+  font-size:13.5px; line-height:1.65;
+  display:none;
+  border-top:1px solid var(--rule);
+}
+.card.open .card-body{display:block}
+.card-meta{
+  font-family:system-ui,sans-serif;
+  font-size:11px; color:var(--muted);
+  margin-bottom:9px;
+  display:flex; flex-wrap:wrap; gap:5px;
+}
+.card-meta span{
+  background:var(--parch);
+  border:1px solid var(--rule);
+  border-radius:3px; padding:1px 6px;
+}
+.card p{margin-bottom:6px; color:var(--ink)}
+.card p strong{color:var(--forest)}
+
+/* ─── Links ──────────────────────────────────────── */
+a.tel,a.map,a.trail,a.web-link{
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 9px; border-radius:4px;
+  font-family:system-ui,sans-serif;
+  font-size:12px; font-weight:600;
+  text-decoration:none; margin:2px 2px 2px 0;
+}
+a.tel{background:#DCFCE7; color:#166534}
+a.map{background:#DBEAFE; color:#1e40af}
+a.trail{background:#F3E8FF; color:#6B21A8}
+a.web-link{background:var(--sand-l); color:var(--forest)}
+
+/* ─── Schedule ───────────────────────────────────── */
+.day-block{margin-bottom:22px}
+.day-label{
+  font-size:16px; color:var(--forest);
+  margin-bottom:8px;
+  padding-bottom:5px;
+  border-bottom:1px solid var(--sand);
+}
+.sched-row{
+  display:flex; gap:10px;
+  padding:7px 0;
+  border-bottom:1px solid var(--rule);
+  font-size:13.5px; align-items:flex-start;
+}
+.sched-time{
+  font-family:system-ui,sans-serif;
+  font-size:10.5px; font-weight:700;
+  color:var(--sand); text-transform:uppercase;
+  letter-spacing:.03em; white-space:nowrap;
+  min-width:70px; padding-top:2px;
+}
+.sched-desc{flex:1; color:var(--ink)}
+
+/* ─── Checklist ──────────────────────────────────── */
+.check-group{margin-bottom:16px}
+.check-group h4{
+  font-family:system-ui,sans-serif;
+  font-size:10.5px; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--forest-l);
+  font-weight:700; margin-bottom:7px;
+}
+.checklist{list-style:none}
+.checklist li{
+  display:flex; align-items:flex-start; gap:10px;
+  padding:6px 0; font-size:13.5px;
+  border-bottom:1px solid var(--rule);
+  cursor:pointer; -webkit-tap-highlight-color:transparent;
+}
+.checklist li .chk{
+  width:18px; height:18px; flex-shrink:0;
+  border:2px solid var(--forest-l); border-radius:3px;
+  display:flex; align-items:center; justify-content:center;
+  margin-top:2px; transition:background .15s;
+}
+.checklist li.done .chk{background:var(--forest-l); border-color:var(--forest-l)}
+.checklist li.done .chk::after{content:'✓'; color:#fff; font-size:11px; font-weight:700}
+.checklist li.done .cl{text-decoration:line-through; color:var(--muted)}
+
+/* ─── Numbers ────────────────────────────────────── */
+.num-grid{display:flex; flex-direction:column; gap:7px; margin:12px 0}
+.num-row{
+  background:var(--white); border:1px solid var(--rule);
+  border-radius:var(--r); padding:10px 13px;
+  display:flex; justify-content:space-between;
+  align-items:center; gap:10px;
+}
+.num-name{font-size:13.5px; font-weight:700; color:var(--ink)}
+.num-note{font-family:system-ui,sans-serif; font-size:11px; color:var(--muted); margin-top:1px}
+
+/* ─── Footer ─────────────────────────────────────── */
+.footer{
+  text-align:center; padding:36px 20px 20px;
+  font-family:system-ui,sans-serif;
+  font-size:12px; color:var(--muted);
+  border-top:1px solid var(--rule);
+  margin-top:40px;
+}
+.footer em{font-style:italic}
+
+/* ─── Map embed ──────────────────────────────────── */
+.map-thumb{
+  display:block; width:100%; margin:12px 0;
+  border-radius:var(--r); overflow:hidden;
+  border:1px solid var(--rule);
+  text-decoration:none;
+}
+.map-thumb img{width:100%; display:block; height:160px; object-fit:cover}
+.map-thumb-label{
+  background:var(--forest); color:#fff;
+  font-family:system-ui,sans-serif;
+  font-size:12px; font-weight:600;
+  text-align:center; padding:7px;
+}
+</style>
+</head>
+<body>
+
+<div class="offline-bar"><b>Works offline</b> — all content saved in this file</div>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="hero">
+  <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Trinity_River_in_Northern_California.jpg/1280px-Trinity_River_in_Northern_California.jpg" alt="Trinity River" onerror="this.style.background='#1E3A2A';this.style.height='100%'">
+  <div class="hero-scrim"></div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Salyer, CA &nbsp;·&nbsp; Six Rivers National Forest</div>
+    <div class="hero-title">Trinity River Vista<br><em style="font-size:.8em;opacity:.85">A Personal Field Guide</em></div>
+    <div class="hero-sub">Brian & Jen &nbsp;·&nbsp; June 29 – July 2, 2026</div>
+    <div class="hero-pills">
+      <div class="hero-pill"><span>In</span>Mon Jun 29, 4pm</div>
+      <div class="hero-pill"><span>Out</span>Thu Jul 2, 10am</div>
+      <div class="hero-pill"><span>Conf</span>XXRY-QDA3</div>
+      <div class="hero-pill"><span>Car</span>L61743712E0</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="nav" id="top-nav">
+  <div class="nav-inner">
+    <a href="#logistics" class="nav-a"><span class="e">🔑</span>Logistics</a>
+    <a href="#drive" class="nav-a"><span class="e">🚗</span>Drive</a>
+    <a href="#groceries" class="nav-a"><span class="e">🛒</span>Groceries</a>
+    <a href="#swim" class="nav-a"><span class="e">🏊</span>Swimming</a>
+    <a href="#hike" class="nav-a"><span class="e">🥾</span>Hiking</a>
+    <a href="#food" class="nav-a"><span class="e">🍽️</span>Food</a>
+    <a href="#activities" class="nav-a"><span class="e">🎯</span>Activities</a>
+    <a href="#fieldnotes" class="nav-a"><span class="e">📋</span>Field Notes</a>
+    <a href="#itinerary" class="nav-a"><span class="e">📅</span>Itinerary</a>
+    <a href="#packing" class="nav-a"><span class="e">🎒</span>Packing</a>
+    <a href="#numbers" class="nav-a"><span class="e">📞</span>Numbers</a>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ══════════ LOGISTICS ══════════ -->
+<section id="logistics">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part One</div>
+  <h2>The Property</h2>
+  <p class="chapter-intro">Everything you need to get in the door and settle in. The door code arrives the day of check-in — watch for it.</p>
+</div>
+
+<table class="ref-table">
+  <tr><td>Address</td><td>121 Emerald City Ln., Salyer, CA 95563 <a class="map" href="https://maps.apple.com/?address=121+Emerald+City+Ln,+Salyer,+CA+95563">Map</a></td></tr>
+  <tr><td>Check-In</td><td>4:00 PM, Monday June 29</td></tr>
+  <tr><td>Check-Out</td><td>10:00 AM, Thursday July 2</td></tr>
+  <tr><td>Conf #</td><td>XXRY-QDA3</td></tr>
+  <tr><td>Vacasa</td><td><a class="tel" href="tel:18005440300">📞 800-544-0300</a></td></tr>
+  <tr><td>Parking</td><td>4 driveway + 1 garage</td></tr>
+</table>
+
+<div class="field-note caution" style="margin-top:14px">
+  <span class="label">⚠ Gate & Door</span>
+  Gate uses a 4-digit code — align it with the <strong>black slashes</strong> on top of the tumbler or it won't open. Door lock is electronic Schlage; 10-digit code sent via Vacasa app on arrival day. Knob left to open, Schlage button + knob right to lock up.
+</div>
+
+<div class="field-note caution">
+  <span class="label">📵 Cell Service</span>
+  Signal dies shortly after Willow Creek. Screenshot this page, all codes, and directions before you lose coverage. WiFi calling works from the porch.
+</div>
+
+<div class="field-note caution">
+  <span class="label">🐻 Bears</span>
+  Active in this area. Nothing outside — not on the BBQ, not in the car, not on the porch. Not a maybe.
+</div>
+
+<div class="field-note">
+  <span class="label">House Notes</span>
+  The left kitchen island faucet is hot water only (red button) — test before use. WiFi is available. Hot tub and BBQ on the patio.
+</div>
+
+<h3 class="sub">Rental Car</h3>
+<table class="ref-table">
+  <tr><td>Provider</td><td>Hertz — SF Beach Street</td></tr>
+  <tr><td>Conf #</td><td>L61743712E0</td></tr>
+  <tr><td>Vehicle</td><td>Kia K4 or similar</td></tr>
+  <tr><td>Pick-up</td><td>Mon Jun 29 @ 9:00 AM</td></tr>
+  <tr><td>Drop-off</td><td>Thu Jul 2 @ 5:00 PM</td></tr>
+  <tr><td>Miles</td><td>Unlimited</td></tr>
+</table>
+</section>
+
+<!-- ══════════ DRIVE ══════════ -->
+<section id="drive">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Two</div>
+  <h2>Getting There</h2>
+  <p class="chapter-intro">About 310 miles and 5–5.5 hours from San Francisco. The route is deliberate — avoids both the Sacramento mess and the coastal hairpins entirely.</p>
+</div>
+
+<div class="photo-wrap">
+  <img src="https://www.pashnit.com/roads/california/hwy299/images/trinity-hwy299-018.jpg" alt="Highway 299 Trinity River Canyon" onerror="this.style.display='none'">
+  <div class="photo-caption">Highway 299 follows the Trinity River canyon east from Willow Creek</div>
+</div>
+
+<table class="ref-table">
+  <tr><td>Step 1</td><td>I-80 East over Bay Bridge → Vacaville</td></tr>
+  <tr><td>Step 2</td><td>I-505 North (Sacramento bypass) → I-5 North</td></tr>
+  <tr><td>Step 3</td><td>I-5 North all the way to Redding (~3.5 hrs from SF)</td></tr>
+  <tr><td>Step 4</td><td>Hwy 299 West → Willow Creek → Salyer (~1.5 hrs)</td></tr>
+  <tr><td>Return</td><td>Exact reverse</td></tr>
+</table>
+
+<div class="field-note">
+  <span class="label">The 299</span>
+  Winds through the Trinity River canyon — there are curves, but it's a well-maintained two-lane highway with passing lanes, not anything like Hwy 1. Scenic and easy.
+</div>
+
+<h3 class="sub">Lunch on the Way Up</h3>
+<div class="cards">
+  <div class="card open">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Option A</span>
+      <span class="card-title">Putah Creek Café — Winters</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~1 hr from SF</span><span>Off I-505</span></div>
+      <p>A beloved Central Valley roadhouse just off the interstate. Wood-fired pizza, big sandwiches, good espresso. A proper sit-down lunch early in the drive before the long I-5 stretch.</p>
+      <p><strong>Best if:</strong> You leave SF by 8–9am and want a real meal before the highway.</p>
+      <a class="map" href="https://maps.apple.com/?q=Putah+Creek+Cafe+Winters+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Option B</span>
+      <span class="card-title">Wilda's Grill — Redding</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~3.5 hrs from SF</span><span>4.6★ / 960+ reviews</span><span>Mon–Sat 11am–7pm</span></div>
+      <p>One of Redding's most beloved lunch spots. Fresh, healthy, affordable — Buddha bowls, falafel, hot dogs, onion rings. No detour required.</p>
+      <a class="tel" href="tel:15307229181">📞 530-722-9181</a>
+      <a class="map" href="https://maps.apple.com/?q=Wilda's+Grill+Redding+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Option C</span>
+      <span class="card-title">Sundial Bridge Stop — Redding</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~3.5 hrs from SF</span><span>Slight detour</span></div>
+      <p>The iconic glass pedestrian bridge over the Sacramento River. Branch House or Mosaic sit right next to it — food is decent but the real draw is stretching your legs and walking the bridge. Mixed reviews on the food, great for a break.</p>
+      <a class="map" href="https://maps.apple.com/?q=Sundial+Bridge+Redding+CA">📍 Map</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ GROCERIES ══════════ -->
+<section id="groceries">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Three</div>
+  <h2>Groceries & Provisioning</h2>
+  <p class="chapter-intro">Stock up before you arrive. Once you're past Willow Creek there's nowhere else, and Ray's runs expensive.</p>
+</div>
+
+<div class="field-note caution">
+  <span class="label">No Whole Foods in Redding</span>
+  Confirmed — the nearest is Sacramento. Your best options for quality meat and produce are Nugget Market in Vacaville or Sprouts in Redding.
+</div>
+
+<div class="cards">
+  <div class="card open">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Best Butcher</span>
+      <span class="card-title">Nugget Market — Vacaville</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>130 Browns Valley Pkwy</span><span>~1 hr into drive</span></div>
+      <p>Upscale NorCal independent grocery with a full-service butcher counter — Wagyu, choice steaks, the works. Get your grilling meat here early, cross it off the list, and drive on.</p>
+      <a class="map" href="https://maps.apple.com/?q=Nugget+Market+Vacaville+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Last Big City</span>
+      <span class="card-title">Sprouts Farmers Market — Redding</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>1401 Hilltop Dr</span><span>4.4★ / 800+ reviews</span><span>Daily 7am–10pm</span></div>
+      <p>The best grocery option in Redding. Highly praised meat department, organic produce, great staff. If you're skipping Vacaville, do your main shop here.</p>
+      <a class="tel" href="tel:15309990988">📞 530-999-0988</a>
+      <a class="map" href="https://maps.apple.com/?q=Sprouts+Farmers+Market+Redding+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Pair With Sprouts</span>
+      <span class="card-title">Trader Joe's — Redding</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>845 Browning St</span><span>Minutes from Sprouts</span></div>
+      <p>Pre-marinated meats, trail mix, snacks, wine, beer. They're close — doing both covers everything. Good TJ's selection for a mountain town supply run.</p>
+      <a class="map" href="https://maps.apple.com/?q=Trader+Joe's+Redding+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">In Town</span>
+      <span class="card-title">Ray's Food Place — Willow Creek</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>38915 Hwy 299</span><span>Daily 7am–10pm</span><span>Only grocery in town</span></div>
+      <p>The only store in Salyer/Willow Creek. Full service with bakery and deli, clean and reasonably stocked — but locals call it "$50 a bag." Fine for forgotten items and mid-trip basics. The deli counter makes a solid sandwich.</p>
+      <a class="tel" href="tel:15306292457">📞 530-629-2457</a>
+      <a class="map" href="https://maps.apple.com/?q=Ray's+Food+Place+Willow+Creek+CA">📍 Map</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ SWIMMING ══════════ -->
+<section id="swim">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Four</div>
+  <h2>The River</h2>
+  <p class="chapter-intro">The Trinity is the whole point. Late June water runs cold and clear — when temperatures hit 95°F, the river is where everyone ends up. Water shoes are non-negotiable; the rocks bake in the sun.</p>
+</div>
+
+<div class="photo-wrap">
+  <img src="https://www.adriftanywhere.com/wp-content/uploads/2015/07/kimtu-cliff-jumping.jpg" alt="Trinity River swimming" onerror="this.style.display='none'">
+  <div class="photo-caption">Kimtu Beach on the Trinity River, Willow Creek</div>
+</div>
+
+<div class="field-note river-note">
+  <span class="label">Check Flows Before River Days</span>
+  Lewiston Dam upstream controls the Trinity's level. Summer baseflow is around 450 cfs but the Bureau of Reclamation can increase releases with little notice — when they do, the river can rise significantly within hours. Check current flows at <strong>waterdata.usgs.gov</strong> (search "Trinity River Salyer") the morning of any river day. If flows look elevated, stick to calmer spots.
+</div>
+
+<h3 class="sub">Swimming Holes</h3>
+<div class="cards">
+  <div class="card open">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag river">Closest</span>
+      <span class="card-title">Big Rock Day Use Area</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>2383 Trinity River Hwy</span><span>4.8★</span><span>Free</span></div>
+      <p>Parking, bathrooms, easy river access. Good for floating, tubing, rock jumping. Current can pick up in the main channel — stay aware of where it strengthens.</p>
+      <p><strong>Best for:</strong> Monday evening after check-in. Closest swim to the house.</p>
+      <a class="map" href="https://maps.apple.com/?q=Big+Rock+Day+Use+Area+Willow+Creek+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag river">Most Fun</span>
+      <span class="card-title">Kimtu Beach</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>151 Kimtu Rd, Willow Creek</span><span>$5 honor parking</span><span>4.4★</span></div>
+      <p>The local classic. Rocky banks, cold deep water, and a cliff about 20 feet up that most people make at least one jump from. Draws a crowd in summer — go early or on a weekday.</p>
+      <p><strong>Also the put-in</strong> for the classic Kimtu → Big Rock float (60–90 min, described below).</p>
+      <a class="tel" href="tel:17072983627">📞 707-298-3627</a>
+      <a class="map" href="https://maps.apple.com/?q=Camp+Kimtu+Willow+Creek+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag river">Sandy Beaches</span>
+      <span class="card-title">Devil's Elbow</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>Near Willow Creek on Hwy 299</span></div>
+      <p>A sharp bend in the river creates sandy beaches and a calm stretch of water — uncommon on the Trinity. Good for lounging and flat swimming. Popular put-in for floating to Tish Tang.</p>
+      <p><strong>Warning:</strong> Strong current where the horseshoe ends — don't drift past it without being ready.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag river">Most Scenic</span>
+      <span class="card-title">Tish Tang — Hoopa Valley</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>20 min north on Hwy 96</span><span>4.8★</span></div>
+      <p>Operated by the Hoopa Valley Tribe. Shaded campground right on the river with both shallow wading spots and deep swimming pools. Sauna and showers on site. A calmer, less crowded feel than the Willow Creek spots.</p>
+      <p><strong>Good option</strong> for checkout morning — a final dip before the drive home.</p>
+      <a class="map" href="https://maps.apple.com/?q=Tish+Tang+Campground+Hoopa+CA">📍 Map</a>
+    </div>
+  </div>
+</div>
+
+<h3 class="sub">Floating</h3>
+<div class="cards">
+  <div class="card open">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag river">The Classic</span>
+      <span class="card-title">Kimtu Beach → Big Rock (Inner Tube)</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>60–90 min</span><span>No heavy rapids</span><span>Most popular summer float</span></div>
+      <p>The quintessential Trinity River afternoon. Put in at Kimtu, drift downstream to Big Rock Beach — gentle current, warm rocks, cold water. At 90–95°F it's as good as it sounds.</p>
+      <p><strong>Logistics:</strong> Park one car at Big Rock, drive the other up to Kimtu. Tubes at Ray's Food Place or Six Rivers Rafting in Willow Creek.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag river">Longer Drift</span>
+      <span class="card-title">Devil's Elbow → Tish Tang (Inner Tube)</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>60–90 min</span><span>Heading north on Hwy 96</span></div>
+      <p>Same basic idea, different section of river. Put in at Devil's Elbow sandy beach, float north to Tish Tang. Requires two cars or a pickup arrangement. Strong current past the horseshoe — be ready for it.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Guided</span>
+      <span class="card-title">Six Rivers Rafting — Guided Trips & Rentals</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>39050 Hwy 299, Willow Creek</span><span>Daily 8am–8pm</span></div>
+      <p>Guided whitewater trips (Class II–V), scenic floats, even gourmet dinner river trips. Raft, inflatable kayak, and SUP rentals also available with all safety gear. If you want to do a float without the two-car logistics headache, a guided trip solves it.</p>
+      <p><strong>Reserve ahead</strong> — they fill up in summer.</p>
+      <a class="tel" href="tel:17075994221">📞 707-599-4221</a>
+      <a class="map" href="https://maps.apple.com/?q=Six+Rivers+Rafting+Willow+Creek+CA">📍 Map</a>
+      <a class="web-link" href="https://www.sixriversrafting.com">🌐 sixriversrafting.com</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ HIKING ══════════ -->
+<section id="hike">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Five</div>
+  <h2>On the Trail</h2>
+  <p class="chapter-intro">Download AllTrails and Gaia GPS trails offline before leaving Willow Creek — there's no signal at any of the trailheads. In Gaia: tap the trail → Download for Offline Use.</p>
+</div>
+
+<div class="photo-wrap">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Canyon_creek_lakes_trail_2007.jpg/1280px-Canyon_creek_lakes_trail_2007.jpg" alt="Canyon Creek Trail Trinity Alps" onerror="this.style.display='none'">
+  <div class="photo-caption">Canyon Creek Trail, Trinity Alps Wilderness</div>
+</div>
+
+<div class="cards">
+  <div class="card open">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Best Hike</span>
+      <span class="card-title">Canyon Creek Trail to the Falls</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~40 min from house</span><span>~9 mi RT to falls</span><span>Moderate–Hard</span><span>4.9★</span></div>
+      <p>The standout hike of the trip. Drive Hwy 299 east to Junction City, then Canyon Creek Road north 13 miles to the trailhead. The canyon is massive white granite, the waterfalls are genuinely dramatic — Lower Falls at mile 3.9, Middle Falls at 4.9. One of the best day hikes in Northern California.</p>
+      <p><strong>Start by 8am.</strong> The switchbacks around mile 2.5 are fully exposed — brutal after 11am. Bring at least 2L of water per person. Don't leave food in the car; bears break into vehicles at this trailhead regularly.</p>
+      <p><strong>Shorter option:</strong> Turn around at Lower Falls for an excellent ~8 mi day.</p>
+      <a class="map" href="https://maps.apple.com/?q=Canyon+Creek+Trailhead+Junction+City+CA">📍 Trailhead</a>
+      <a class="trail" href="https://www.alltrails.com/trail/us/california/canyon-creek-lakes-trail">🥾 AllTrails</a>
+      <a class="trail" href="https://www.gaiagps.com/map/?loc=12.0/-123.0244/40.8870">🗺 Gaia GPS</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Easier</span>
+      <span class="card-title">Stuart Fork Trail — Weaverville</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~1 hr from house</span><span>Go as far as you like</span><span>Easy–Moderate</span></div>
+      <p>Gradual forest trail along the Stuart Fork of the Trinity River through meadows and old-growth trees. No destination required — go 2 or 4 miles and turn around whenever the mood strikes. Much more relaxed than Canyon Creek; good for a day when you want to move without a mission.</p>
+      <a class="map" href="https://maps.apple.com/?q=Stuart+Fork+Trail+Weaverville+CA">📍 Map</a>
+      <a class="trail" href="https://www.alltrails.com/trail/us/california/stuart-fork-trail-to-emerald-and-sapphire-lakes">🥾 AllTrails</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Easy/Local</span>
+      <span class="card-title">Horse Linto Creek Trail</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~15–20 min from house</span><span>Flat, heavily shaded</span></div>
+      <p>Six Rivers National Forest. Old-growth Douglas firs and oaks alongside a cold creek — a good low-energy morning walk when the heat is already building. Good for a short outing before a river afternoon.</p>
+      <p><strong>Note:</strong> Not on AllTrails. Getting there requires a few miles of narrow winding dirt road — fine for a sedan but take it slow. Poison oak is heavy along the creek banks; wear long pants.</p>
+      <a class="map" href="https://maps.apple.com/?q=Horse+Linto+Campground+Willow+Creek+CA">📍 Map</a>
+      <a class="trail" href="https://www.gaiagps.com/map/?loc=13.0/-123.6043/41.0070">🗺 Gaia GPS</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Day Trip</span>
+      <span class="card-title">Arcata Community Forest — Redwoods</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~50 min west on Hwy 299</span><span>Easy</span></div>
+      <p>Hwy 299 west toward the coast is wide and well-graded — not the tight cliff roads you wanted to avoid. The Arcata Community Forest is 790 acres of old redwoods with smooth, well-marked trails right behind town. Pair the afternoon with lunch in Trinidad (20 min north on flat Hwy 101) — sea stacks, clam chowder, and a different pace entirely.</p>
+      <a class="map" href="https://maps.apple.com/?q=Arcata+Community+Forest+CA">📍 Map</a>
+      <a class="trail" href="https://www.alltrails.com/parks/us/california/arcata-community-forest">🥾 AllTrails</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ FOOD ══════════ -->
+<section id="food">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Six</div>
+  <h2>Where to Eat</h2>
+  <p class="chapter-intro">Willow Creek is a small mountain town — the dining scene reflects that. A few places punch well above their weight. Osprey Café is unmissable. Bigfoot Steakhouse earns its reputation. Everything else fills in around them.</p>
+</div>
+
+<div class="photo-wrap">
+  <img src="https://restaurantguru.com/media1/restaurant/2024/08/restaurant-osprey-cafe-willow-creek_400x300.jpg" alt="Osprey Cafe Willow Creek" onerror="this.style.display='none'">
+  <div class="photo-caption">Osprey Café, downtown Willow Creek</div>
+</div>
+
+<h3 class="sub">Near the House</h3>
+<div class="cards">
+  <div class="card open">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag rust">⭐ Closest</span>
+      <span class="card-title">The Rock Slide Bar & Grill — Salyer</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>20811 CA-299, Salyer</span><span>4.8★</span><span>~5 min from house</span><span>Mon–Wed 4pm–midnight</span><span>Thu–Fri 2pm</span><span>Sat–Sun noon</span></div>
+      <p>Closest bar and grill to the house by a long shot — hidden gem right on 299 in Salyer. Friendly local crowd, huge portions, good burgers and the "Trinity fish." Outdoor summer seating. The kind of place you only find if you're already staying nearby.</p>
+      <p><strong>Good for:</strong> First night drinks, an easy dinner when you don't want to drive to Willow Creek.</p>
+      <a class="tel" href="tel:15306293899">📞 530-629-3899</a>
+      <a class="map" href="https://maps.apple.com/?q=The+Rock+Slide+Bar+Grill+Salyer+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Deli / Quick</span>
+      <span class="card-title">Salyer Store</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~3.6 mi from house</span></div>
+      <p>Local convenience store with a deli counter — sandwiches, salads, basics. Not much else near the house, but does the job for a quick lunch pickup without driving all the way to Willow Creek.</p>
+      <a class="map" href="https://maps.apple.com/?q=Salyer+Store+CA">📍 Map</a>
+    </div>
+  </div>
+</div>
+
+<h3 class="sub">Willow Creek</h3>
+<div class="cards">
+  <div class="card open">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Breakfast / Lunch</span>
+      <span class="card-title">Osprey Café</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>39010 CA-299</span><span>4.8★</span><span>Daily 8am–3pm</span></div>
+      <p>The best stop in town. An organic café with real care behind it — fresh-made sandwiches, smoothies, excellent espresso, chocolate chip cookies the size of your face. Goes well with a morning swim plan: coffee and a wrap, then head to the river.</p>
+      <p><strong>Order:</strong> Turkey wrap, strawberry haze smoothie.</p>
+      <a class="tel" href="tel:17072968026">📞 707-296-8026</a>
+      <a class="map" href="https://maps.apple.com/?q=Osprey+Cafe+Willow+Creek+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Best Dinner</span>
+      <span class="card-title">Bigfoot Steakhouse</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>19 Willow Way</span><span>4.2★</span><span>Mon–Thu 11am–8pm · Fri–Sun 9am–9pm</span></div>
+      <p>The place to go for a proper dinner out. Steaks, prawns, burgers — the sirloin and mashed potatoes get mentioned by nearly every reviewer. Bigfoot artifacts everywhere; feels exactly like it should for this town.</p>
+      <p><strong>Best after:</strong> Canyon Creek hike day. You'll have earned it.</p>
+      <a class="tel" href="tel:15307392614">📞 530-739-2614</a>
+      <a class="map" href="https://maps.apple.com/?q=Bigfoot+Steakhouse+Willow+Creek+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Casual Pub</span>
+      <span class="card-title">Raging Creek Pub</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>38939 CA-299</span><span>4.3★</span></div>
+      <p>Solid pub food with local character. Teriyaki salmon bowls, burgers, garlic herb fries that reviewers rave about, local draft beers and ciders. Plant-based options too.</p>
+      <p><strong>Good for:</strong> Casual dinner or the last lunch before the drive home on Thursday.</p>
+      <a class="tel" href="tel:15307688687">📞 530-768-8687</a>
+      <a class="map" href="https://maps.apple.com/?q=Raging+Creek+Pub+Willow+Creek+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Dive Bar</span>
+      <span class="card-title">Forks Lounge</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>38986 CA-299</span><span>4.5★</span><span>Daily 11am–11pm</span><span>💵 Cash Only</span></div>
+      <p>A true local dive bar, and a good one. Stiff drinks, good beer, friendly regulars, live music some nights. Called "one of the best dive bars in America" by a Yelp reviewer, which feels about right. Bring cash.</p>
+      <a class="tel" href="tel:15306292679">📞 530-629-2679</a>
+      <a class="map" href="https://maps.apple.com/?q=Forks+Lounge+Willow+Creek+CA">📍 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">River Setting</span>
+      <span class="card-title">Strawhouse Café — Big Flat</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~20 min east on Hwy 299</span></div>
+      <p>Organic coffee roasted on-site, wood-fired pizza, and outdoor seating on the Trinity River bank. Worth the drive for something different — more remote and peaceful than downtown Willow Creek.</p>
+      <a class="map" href="https://maps.apple.com/?q=Strawhouse+Cafe+Big+Flat+CA">📍 Map</a>
+    </div>
+  </div>
+</div>
+
+<h3 class="sub">On the Drive (Redding)</h3>
+<div class="cards">
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Best Redding Lunch</span>
+      <span class="card-title">Wilda's Grill</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>1712 Churn Creek Rd</span><span>4.6★ / 960+ reviews</span><span>Mon–Sat 11am–7pm</span></div>
+      <p>Redding's most beloved lunch spot. Fresh, healthy, affordable — Buddha bowls, falafel, excellent onion rings. Easy on the way home Thursday.</p>
+      <a class="tel" href="tel:15307229181">📞 530-722-9181</a>
+      <a class="map" href="https://maps.apple.com/?q=Wilda's+Grill+Redding+CA">📍 Map</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ACTIVITIES ══════════ -->
+<section id="activities">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Seven</div>
+  <h2>Other Things to Do</h2>
+  <p class="chapter-intro">Beyond the river and the trails, the area has more going on than most people expect.</p>
+</div>
+
+
+
+<div class="cards">
+
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Fishing</span>
+      <span class="card-title">Trinity River — Right at the House</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <p>Late June is prime for Spring Chinook Salmon — the river opens July 1 for salmon from the South Fork upstream. Year-round open for hatchery steelhead and trout. Closest access points: Tunnel Flat (6 mi east on 299) and Hawkins Bar (10 mi east).</p>
+      <p><strong>Buy your CA fishing license before leaving SF</strong> — hard to find supplies in Willow Creek. Get it at ca.wildlifeapps.ca.gov or any sporting goods store. Best times: before 10am or dusk — fish go quiet in the midday heat.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Night Sky</span>
+      <span class="card-title">Stargazing from the House</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <p>Salyer sits in a genuine dark sky zone with zero light pollution. The new moon is June 25 — by June 29 you'll have just a thin crescent, meaning near-perfect conditions all three nights. Step outside after 10pm and the Milky Way should be fully visible.</p>
+      <p>Pack a blanket. The driveway or porch both work. This is one of those things you don't plan and end up talking about.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">Day Trip</span>
+      <span class="card-title">Arcata & Trinidad — Redwood Coast</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span>~50 min west on Hwy 299</span></div>
+      <p>Hwy 299 to the coast is wide and well-graded — not the cliff roads you wanted to avoid. Arcata Community Forest has easy redwood trails right behind town. Then 20 minutes north on flat Hwy 101 to Trinidad — dramatic sea stacks, and clam chowder at Trinidad Bay Eatery & Gallery on the bluff.</p>
+      <a class="map" href="https://maps.apple.com/?q=Trinidad+Bay+CA">📍 Trinidad Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd" onclick="tog(this)">
+      <span class="card-tag">House</span>
+      <span class="card-title">Hot Tub, Porch & the Grill</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <p>The house sits on 3 acres with a hot tub, BBQ patio, and views of the river. After Canyon Creek or a long day on the water, a cold beer and a steak on the grill might be the entire evening's agenda. That's a good evening.</p>
+      <p>Download music, podcasts, and movies before you lose signal. Once you're past Willow Creek it's a true digital detox whether you planned one or not.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ FIELD NOTES ══════════ -->
+<section id="fieldnotes">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Eight</div>
+  <h2>Field Notes</h2>
+  <p class="chapter-intro">The stuff a local would tell you before you headed out. Not meant to alarm — just worth knowing.</p>
+</div>
+
+<div class="field-note river-note">
+  <span class="label">🌊 The River Has Moods</span>
+  The Trinity is dam-controlled. Lewiston Dam upstream can increase releases with short notice, raising the river level noticeably within hours. Check flows the morning of any river day at <strong>waterdata.usgs.gov</strong> — search "Trinity River Salyer." If the river looks higher or faster than expected when you arrive at a swimming hole, trust your eyes. The locals know: when in doubt, watch the water a while before jumping in. Cold water + unexpected current is a combination to respect.
+</div>
+
+<div class="field-note river-note">
+  <span class="label">🌊 River Safety Basics</span>
+  The Trinity has had drownings, including at Kimtu. The current can be deceiving — it looks calmer than it is in places. Never swim alone. If you get swept into fast current: don't fight it, don't stand (the force will knock you under). Roll onto your back, feet pointing downstream, toes up, and look ahead to steer around rocks with your feet. Most incidents happen when people underestimate the cold, the current, or combine alcohol with swimming. You'll be fine if you're paying attention.
+</div>
+
+<div class="field-note caution">
+  <span class="label">🔥 Wildfire Smoke</span>
+  Late June in Trinity County is peak fire weather — hot, dry, low humidity. Fires have burned directly along Hwy 299 in past seasons. It doesn't mean there will be a fire on your trip, but it's worth knowing. If smoke shows up, check <strong>airnow.gov</strong> or the <strong>PurpleAir app</strong> before Canyon Creek day. AQI in the orange or red isn't a great day for a long exposed hike. The house has WiFi so you can check once you arrive even without cell service.
+</div>
+
+<div class="field-note caution">
+  <span class="label">🌿 Poison Oak</span>
+  Abundant in the Trinity River canyon — particularly along creek banks, in lower trail sections, and at river access points. It grows as a shrub with three shiny, slightly waxy leaves (green in summer, can have a reddish tinge). If you brush against it, wash the exposed skin with cold water and soap within 5–10 minutes — the oil (urushiol) is what causes the rash, and it takes a little time to bond to your skin. Tecnu or rubbing alcohol work well as a backup. Wear long pants on hikes into brushy areas.
+</div>
+
+<div class="field-note caution">
+  <span class="label">🐍 Rattlesnakes & Ticks</span>
+  Both present in the area in summer. Rattlesnakes favor warm exposed rocks and granite — relevant on the upper sections of Canyon Creek where you're scrambling. Never reach blindly under rocks or logs; step on top of logs, not over them. Ticks are more common in brushy, shaded areas. Do a full check after any hike — behind knees, armpits, hairline. Permethrin spray on hiking clothes before you go is highly effective.
+</div>
+
+<div class="field-note caution">
+  <span class="label">☀️ Heat</span>
+  Salyer regularly hits 95–100°F in late June. The rhythm locals use: river or hike in the morning, rest or nap during peak heat (1–4pm), then head back out in the early evening when it softens. Canyon Creek Trail specifically — if you start at noon you'll regret the switchbacks. Early start is not optional on hot days.
+</div>
+
+<div class="field-note">
+  <span class="label">⛽ Gas</span>
+  Fill up in Redding before hitting 299. There's a station in Willow Creek but prices run high. If you're doing the Canyon Creek day trip east toward Weaverville, fill up in Willow Creek before you go — don't assume you can get gas out there easily.
+</div>
+
+<div class="field-note">
+  <span class="label">🏥 Nearest Hospital</span>
+  Mad River Community Hospital, Arcata — about 50 miles west, roughly 1 hour on Hwy 299. No urgent care in Willow Creek. Trinity County Sheriff: (530) 623-2611. In an emergency, call 911 — response times are longer out here than in the city, so knowing this in advance is useful. WiFi calling from the porch should work for emergency calls.
+</div>
+
+<div class="field-note">
+  <span class="label">🎣 Fishing License</span>
+  Required for the Trinity. Buy online at <strong>ca.wildlifeapps.ca.gov</strong> or any sporting goods store before you leave SF — supplies are hard to find in Willow Creek. The river opens July 1 for Chinook salmon in the lower section. Year-round for steelhead and hatchery trout.
+</div>
+</section>
+
+<!-- ══════════ ITINERARY ══════════ -->
+<section id="itinerary">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Nine</div>
+  <h2>Day by Day</h2>
+  <p class="chapter-intro">One way to arrange it. Rearrange freely — but the heat rhythm matters: mornings active, midday rest, evenings back out.</p>
+</div>
+
+<div class="day-block">
+  <div class="day-label">Monday, June 29 — Drive Day</div>
+  <div class="sched-row"><div class="sched-time">9:00 AM</div><div class="sched-desc">Hertz pickup, SF Beach Street</div></div>
+  <div class="sched-row"><div class="sched-time">~10 AM</div><div class="sched-desc"><em>Option:</em> Putah Creek Café in Winters — early lunch if you left early</div></div>
+  <div class="sched-row"><div class="sched-time">~11:30 AM</div><div class="sched-desc"><em>Option A grocery:</em> Nugget Market, Vacaville — steaks & premium items</div></div>
+  <div class="sched-row"><div class="sched-time">~2:00 PM</div><div class="sched-desc">Redding: Wilda's Grill lunch + Sprouts & Trader Joe's shop</div></div>
+  <div class="sched-row"><div class="sched-time">~4:00 PM</div><div class="sched-desc"><strong>Willow Creek — last cell signal.</strong> Screenshot all codes. Download offline maps.</div></div>
+  <div class="sched-row"><div class="sched-time">4:00 PM</div><div class="sched-desc">Check in at Trinity River Vista. Get door code from Vacasa app.</div></div>
+  <div class="sched-row"><div class="sched-time">Evening</div><div class="sched-desc">Quick swim at Big Rock. Grill at the house. Nightcap at Rock Slide or Forks Lounge.</div></div>
+</div>
+
+<div class="day-block">
+  <div class="day-label">Tuesday, June 30 — River Day</div>
+  <div class="sched-row"><div class="sched-time">Morning</div><div class="sched-desc">Osprey Café — coffee and breakfast wrap (opens 8am)</div></div>
+  <div class="sched-row"><div class="sched-time">10 AM</div><div class="sched-desc">Big Rock Day Use Area — swimming, wading, floating</div></div>
+  <div class="sched-row"><div class="sched-time">Afternoon</div><div class="sched-desc">Kimtu Beach — cliff jump, swim, then tube Kimtu → Big Rock (get tubes at Ray's)</div></div>
+  <div class="sched-row"><div class="sched-time">1–4 PM</div><div class="sched-desc">Rest, nap, or hot tub — peak heat window</div></div>
+  <div class="sched-row"><div class="sched-time">Evening</div><div class="sched-desc">Bigfoot Steakhouse for dinner <em>or</em> grill at the house again</div></div>
+  <div class="sched-row"><div class="sched-time">Night</div><div class="sched-desc">Hot tub. Stargazing — bring blanket, go out around 10pm</div></div>
+</div>
+
+<div class="day-block">
+  <div class="day-label">Wednesday, July 1 — Hike Day</div>
+  <div class="sched-row"><div class="sched-time">7:30 AM</div><div class="sched-desc">Early start — drive to Canyon Creek Trailhead (~40 min on Hwy 299 East). Pack lunch.</div></div>
+  <div class="sched-row"><div class="sched-time">8:30 AM</div><div class="sched-desc">Hit the trail. Goal: Lower Falls by 12:30pm (~9 mi RT)</div></div>
+  <div class="sched-row"><div class="sched-time">~1:30 PM</div><div class="sched-desc">Drive back. River dip to cool off.</div></div>
+
+  <div class="sched-row"><div class="sched-time">Evening</div><div class="sched-desc">Raging Creek Pub or Strawhouse Café for dinner. Early night.</div></div>
+</div>
+
+<div class="day-block">
+  <div class="day-label">Thursday, July 2 — Checkout</div>
+  <div class="sched-row"><div class="sched-time">Morning</div><div class="sched-desc">Final hot tub soak. Coffee on the porch.</div></div>
+  <div class="sched-row"><div class="sched-time">10:00 AM</div><div class="sched-desc">Check out — Schlage button + knob right to lock</div></div>
+  <div class="sched-row"><div class="sched-time">Option</div><div class="sched-desc">Morning swim at Tish Tang (20 min north on Hwy 96) before heading east</div></div>
+  <div class="sched-row"><div class="sched-time">Lunch</div><div class="sched-desc">Raging Creek Pub send-off <em>or</em> wait for Wilda's Grill in Redding</div></div>
+  <div class="sched-row"><div class="sched-time">~2:00 PM</div><div class="sched-desc">Redding — lunch, gas, snacks. Signal returns here.</div></div>
+  <div class="sched-row"><div class="sched-time">~5:00 PM</div><div class="sched-desc">Hertz return, SF Beach Street</div></div>
+</div>
+</section>
+
+<!-- ══════════ PACKING ══════════ -->
+<section id="packing">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Ten</div>
+  <h2>Packing List</h2>
+  <p class="chapter-intro">Tap any item to check it off. Your progress saves automatically.</p>
+</div>
+
+<div class="check-group">
+  <h4>Before Leaving SF</h4>
+  <ul class="checklist">
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Download Google Maps offline: Salyer, Willow Creek, Junction City / Weaverville area</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Screenshot gate code, door lock info, Vacasa confirmation</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Turn on WiFi Calling on both phones (Settings → Phone → WiFi Calling)</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Download AllTrails + cache Canyon Creek trail offline</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Download music, podcasts, movies — no streaming after Willow Creek</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Buy California fishing license if fishing (ca.wildlifeapps.ca.gov)</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Bring cash for Forks Lounge (cash only) and Kimtu parking ($5)</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Permethrin spray for hiking clothes — apply and let dry before you go</span></li>
+  </ul>
+</div>
+
+<div class="check-group">
+  <h4>River Gear</h4>
+  <ul class="checklist">
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Water shoes / Chacos / Tevas — rocks are scalding in July, mandatory</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Waterproof dry bag for keys, phone, wallet</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Sunscreen SPF 50+</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Wide-brim hat + polarized sunglasses</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Quick-dry towels</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Inner tubes optional — can buy at Ray's or Six Rivers Rafting in Willow Creek</span></li>
+  </ul>
+</div>
+
+<div class="check-group">
+  <h4>Hiking</h4>
+  <ul class="checklist">
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Hiking boots or trail shoes — loose rock near top of Canyon Creek</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">2L+ water per person — no services at Canyon Creek trailhead</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Bug spray — especially near creek drainages</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Packed lunch for Canyon Creek day</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Tecnu or rubbing alcohol (poison oak exposure treatment)</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Long pants for brushy trails (Horse Linto, lower Canyon Creek)</span></li>
+  </ul>
+</div>
+
+<div class="check-group">
+  <h4>House & Grill</h4>
+  <ul class="checklist">
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Steaks — buy at Nugget Market (Vacaville) or Sprouts (Redding)</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Wine and beer — Trader Joe's in Redding has good selection</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Meat thermometer + tongs</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Coffee if you have a preference — Osprey opens at 8am otherwise</span></li>
+    <li onclick="chk(this)"><span class="chk"></span><span class="cl">Blanket for stargazing</span></li>
+  </ul>
+</div>
+</section>
+
+<!-- ══════════ NUMBERS ══════════ -->
+<section id="numbers">
+<div class="chapter">
+  <div class="chapter-eyebrow">Part Eleven</div>
+  <h2>Key Numbers</h2>
+  <p class="chapter-intro">Everything tappable. Screenshot this section before leaving Willow Creek.</p>
+</div>
+
+<div class="num-grid">
+  <div class="num-row"><div><div class="num-name">Vacasa Support</div><div class="num-note">Property management · 24/7</div></div><a class="tel" href="tel:18005440300">📞 800-544-0300</a></div>
+  <div class="num-row"><div><div class="num-name">Hertz</div><div class="num-note">Conf: L61743712E0</div></div><a class="tel" href="tel:18007368222">📞 800-736-8222</a></div>
+  <div class="num-row"><div><div class="num-name">Trinity County Sheriff</div><div class="num-note">Emergency non-911</div></div><a class="tel" href="tel:15306232611">📞 530-623-2611</a></div>
+  <div class="num-row"><div><div class="num-name">Mad River Hospital</div><div class="num-note">Arcata · Nearest hospital · ~1 hr west</div></div><a class="tel" href="tel:17078223621">📞 707-822-3621</a></div>
+  <div class="num-row"><div><div class="num-name">Six Rivers Rafting</div><div class="num-note">Rentals & guided trips · 8am–8pm daily</div></div><a class="tel" href="tel:17075994221">📞 707-599-4221</a></div>
+  <div class="num-row"><div><div class="num-name">Osprey Café</div><div class="num-note">Daily 8am–3pm</div></div><a class="tel" href="tel:17072968026">📞 707-296-8026</a></div>
+  <div class="num-row"><div><div class="num-name">Rock Slide Bar & Grill</div><div class="num-note">Salyer · Closest to house</div></div><a class="tel" href="tel:15306293899">📞 530-629-3899</a></div>
+  <div class="num-row"><div><div class="num-name">Bigfoot Steakhouse</div><div class="num-note">Dinner · Mon–Sun</div></div><a class="tel" href="tel:15307392614">📞 530-739-2614</a></div>
+  <div class="num-row"><div><div class="num-name">Forks Lounge</div><div class="num-note">Daily 11am–11pm · Cash only</div></div><a class="tel" href="tel:15306292679">📞 530-629-2679</a></div>
+  <div class="num-row"><div><div class="num-name">Raging Creek Pub</div><div class="num-note">Lunch & dinner</div></div><a class="tel" href="tel:15307688687">📞 530-768-8687</a></div>
+
+  <div class="num-row"><div><div class="num-name">Ray's Food Place</div><div class="num-note">Daily 7am–10pm · Only grocery</div></div><a class="tel" href="tel:15306292457">📞 530-629-2457</a></div>
+  <div class="num-row"><div><div class="num-name">Wilda's Grill (Redding)</div><div class="num-note">Mon–Sat 11am–7pm</div></div><a class="tel" href="tel:15307229181">📞 530-722-9181</a></div>
+  <div class="num-row"><div><div class="num-name">Sprouts (Redding)</div><div class="num-note">Daily 7am–10pm · Grocery</div></div><a class="tel" href="tel:15309990988">📞 530-999-0988</a></div>
+</div>
+</section>
+
+<div class="footer">
+  <em>Trinity River Vista &nbsp;·&nbsp; June 29 – July 2, 2026</em><br>
+  Brian & Jen &nbsp;·&nbsp; Salyer, CA<br><br>
+  Works fully offline — all content saved in this file.
+</div>
+
+</div><!-- /page -->
+
+<script>
+// Toggle accordion cards
+function tog(hd){
+  hd.closest('.card').classList.toggle('open');
+}
+
+// Checklist persistence
+function chk(li){
+  li.classList.toggle('done');
+  try{
+    const items=[...document.querySelectorAll('.checklist li')];
+    const state=items.map(i=>i.classList.contains('done'));
+    localStorage.setItem('trinity-chk',JSON.stringify(state));
+  }catch(e){}
+}
+try{
+  const saved=JSON.parse(localStorage.getItem('trinity-chk')||'[]');
+  const items=[...document.querySelectorAll('.checklist li')];
+  saved.forEach((d,i)=>{if(d&&items[i])items[i].classList.add('done')});
+}catch(e){}
+
+// Active nav on scroll
+const secs=[...document.querySelectorAll('section[id]')];
+const navAs=[...document.querySelectorAll('.nav-a')];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navAs.forEach(a=>a.classList.remove('active'));
+      const a=document.querySelector(`.nav-a[href="#${e.target.id}"]`);
+      if(a){a.classList.add('active');a.scrollIntoView({behavior:'auto',block:'nearest',inline:'center'});}
+    }
+  });
+},{threshold:0.25});
+secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
