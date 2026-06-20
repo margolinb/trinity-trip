@@ -1,4 +1,4 @@
-const CACHE = 'trinity-trip-v2';
+const CACHE = 'trinity-trip-v3';
 
 const PRECACHE = [
   './',
