@@ -392,7 +392,120 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
 
 <!-- ══════════ HERO ══════════ -->
 <div class="hero">
-  <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Trinity_River_in_Northern_California.jpg/1280px-Trinity_River_in_Northern_California.jpg" alt="Trinity River" onerror="this.style.background='#1E3A2A';this.style.height='100%'">
+  <svg class="hero-img" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <!-- Sky gradient -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="60%" stop-color="#B8D9F0"/>
+      <stop offset="100%" stop-color="#D4EAF7"/>
+    </linearGradient>
+    <linearGradient id="mtn-far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A7A5C"/>
+      <stop offset="100%" stop-color="#2D5C3F"/>
+    </linearGradient>
+    <linearGradient id="mtn-mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2D5C3F"/>
+      <stop offset="100%" stop-color="#1E3A2A"/>
+    </linearGradient>
+    <linearGradient id="rivergrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A90B8"/>
+      <stop offset="50%" stop-color="#2F6690"/>
+      <stop offset="100%" stop-color="#3A7AA8"/>
+    </linearGradient>
+    <linearGradient id="bank" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B7355"/>
+      <stop offset="100%" stop-color="#6B5A3E"/>
+    </linearGradient>
+    <filter id="blur-sm"><feGaussianBlur stdDeviation="1.5"/></filter>
+    <filter id="blur-lg"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="420" fill="url(#sky)"/>
+
+  <!-- Sun haze -->
+  <ellipse cx="650" cy="80" rx="80" ry="60" fill="#FFF8E1" opacity="0.3" filter="url(#blur-lg)"/>
+
+  <!-- Far mountains (hazy, blue-shifted) -->
+  <polygon points="0,220 60,150 120,180 200,130 280,160 350,120 430,155 500,115 580,148 650,118 720,145 800,120 800,260 0,260" fill="#5A8A6E" opacity="0.55" filter="url(#blur-sm)"/>
+
+  <!-- Mid mountains left -->
+  <polygon points="0,260 80,185 160,215 240,175 320,205 400,170 480,200 520,260 0,260" fill="url(#mtn-far)"/>
+  <!-- Mid mountains right -->
+  <polygon points="480,260 520,190 600,160 680,185 750,155 800,175 800,260" fill="url(#mtn-far)"/>
+
+  <!-- Near ridge left -->
+  <polygon points="0,280 100,220 180,245 260,225 320,260 380,280 0,280" fill="url(#mtn-mid)"/>
+  <!-- Near ridge right -->
+  <polygon points="420,280 480,260 560,240 640,255 720,230 800,250 800,280 420,280" fill="url(#mtn-mid)"/>
+
+  <!-- Canyon walls -->
+  <polygon points="0,420 60,290 140,310 180,420" fill="#1E3A2A"/>
+  <polygon points="620,420 680,305 760,285 800,420" fill="#1E3A2A"/>
+
+  <!-- Trees left ridge -->
+  <g fill="#1B3525" opacity="0.9">
+    <polygon points="15,290 25,265 35,290"/>
+    <polygon points="30,292 42,264 54,292"/>
+    <polygon points="50,290 63,262 76,290"/>
+    <polygon points="70,293 84,263 98,293"/>
+    <polygon points="92,291 107,260 122,291"/>
+    <polygon points="115,290 131,258 147,290"/>
+    <polygon points="138,292 155,260 172,292"/>
+  </g>
+  <!-- Trees right ridge -->
+  <g fill="#1B3525" opacity="0.9">
+    <polygon points="640,291 655,260 670,291"/>
+    <polygon points="662,290 678,257 694,290"/>
+    <polygon points="686,292 703,258 720,292"/>
+    <polygon points="712,290 730,255 748,290"/>
+    <polygon points="738,292 758,258 778,292"/>
+    <polygon points="762,290 783,255 800,290"/>
+  </g>
+
+  <!-- River -->
+  <path d="M160,340 Q250,320 380,330 Q500,338 640,320 L660,420 L140,420 Z" fill="url(#rivergrad)"/>
+
+  <!-- River shimmer highlights -->
+  <ellipse cx="280" cy="345" rx="60" ry="5" fill="#9ECAE1" opacity="0.4" transform="rotate(-3,280,345)"/>
+  <ellipse cx="450" cy="337" rx="55" ry="4" fill="#9ECAE1" opacity="0.35" transform="rotate(2,450,337)"/>
+  <ellipse cx="560" cy="332" rx="40" ry="3" fill="#9ECAE1" opacity="0.3"/>
+
+  <!-- River rocks -->
+  <ellipse cx="310" cy="355" rx="12" ry="5" fill="#8B7355" opacity="0.6"/>
+  <ellipse cx="410" cy="350" rx="9" ry="4" fill="#7A6648" opacity="0.5"/>
+  <ellipse cx="490" cy="342" rx="7" ry="3" fill="#8B7355" opacity="0.4"/>
+
+  <!-- Sandy banks -->
+  <path d="M140,370 Q200,355 310,360 Q380,363 420,370 L420,420 L140,420 Z" fill="url(#bank)" opacity="0.7"/>
+  <path d="M530,355 Q600,345 660,350 L660,420 L530,420 Z" fill="url(#bank)" opacity="0.6"/>
+
+  <!-- Foreground trees left -->
+  <g fill="#0F2218">
+    <polygon points="-5,420 18,345 41,420"/>
+    <polygon points="25,420 52,338 79,420"/>
+    <polygon points="60,420 90,330 120,420"/>
+    <polygon points="95,420 128,340 161,420"/>
+  </g>
+  <!-- Foreground trees right -->
+  <g fill="#0F2218">
+    <polygon points="640,420 665,335 690,420"/>
+    <polygon points="670,420 698,330 726,420"/>
+    <polygon points="704,420 734,338 764,420"/>
+    <polygon points="740,420 772,342 804,420"/>
+  </g>
+
+  <!-- Mist on river -->
+  <rect x="140" y="310" width="520" height="30" fill="#EAF4FB" opacity="0.12" filter="url(#blur-lg)"/>
+
+  <!-- Subtle vignette -->
+  <radialGradient id="vig" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
+  </radialGradient>
+  <rect width="800" height="420" fill="url(#vig)"/>
+</svg>
   <div class="hero-scrim"></div>
   <div class="hero-text">
     <div class="hero-eyebrow">Salyer, CA &nbsp;·&nbsp; Six Rivers National Forest</div>
@@ -483,7 +596,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
 </div>
 
 <div class="photo-wrap">
-  <img src="https://www.pashnit.com/roads/california/hwy299/images/trinity-hwy299-018.jpg" alt="Highway 299 Trinity River Canyon" onerror="this.style.display='none'">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Hwy_299_Trinity_River_Canyon.jpg" onerror="this.closest('.photo-wrap').style.display='none'" alt="Highway 299 Trinity River Canyon" onerror="this.style.display='none'">
   <div class="photo-caption">Highway 299 follows the Trinity River canyon east from Willow Creek</div>
 </div>
 
@@ -619,7 +732,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
 </div>
 
 <div class="photo-wrap">
-  <img src="https://www.adriftanywhere.com/wp-content/uploads/2015/07/kimtu-cliff-jumping.jpg" alt="Trinity River swimming" onerror="this.style.display='none'">
+  <img src="https://willowcreekscd.com/wp-content/uploads/2019/06/Kimtu-1.jpg" onerror="this.closest('.photo-wrap').style.display='none'" alt="Trinity River swimming" onerror="this.style.display='none'">
   <div class="photo-caption">Kimtu Beach on the Trinity River, Willow Creek</div>
 </div>
 
@@ -736,7 +849,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
 </div>
 
 <div class="photo-wrap">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Canyon_creek_lakes_trail_2007.jpg/1280px-Canyon_creek_lakes_trail_2007.jpg" alt="Canyon Creek Trail Trinity Alps" onerror="this.style.display='none'">
+  <img src="https://californiacrossroads.com/wp-content/uploads/2022/06/Canyon-Creek-Falls-Trinity-Alps.jpg" onerror="this.closest('.photo-wrap').style.display='none'" alt="Canyon Creek Trail Trinity Alps" onerror="this.style.display='none'">
   <div class="photo-caption">Canyon Creek Trail, Trinity Alps Wilderness</div>
 </div>
 
@@ -809,7 +922,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
 </div>
 
 <div class="photo-wrap">
-  <img src="https://restaurantguru.com/media1/restaurant/2024/08/restaurant-osprey-cafe-willow-creek_400x300.jpg" alt="Osprey Cafe Willow Creek" onerror="this.style.display='none'">
+  <img src="https://media-cdn.tripadvisor.com/media/photo-o/1b/27/65/c8/osprey-cafe.jpg" onerror="this.closest('.photo-wrap').style.display='none'" alt="Osprey Cafe Willow Creek" onerror="this.style.display='none'">
   <div class="photo-caption">Osprey Café, downtown Willow Creek</div>
 </div>
 
