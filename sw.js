@@ -1,14 +1,6 @@
-const CACHE = 'trinity-trip-v3';
-
-const PRECACHE = [
-  './',
-  './index.html'
-];
+const CACHE = 'trinity-trip-v4';
 
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(PRECACHE))
-  );
   self.skipWaiting();
 });
 
@@ -26,17 +18,19 @@ self.addEventListener('fetch', event => {
   const isSameOrigin = url.origin === self.location.origin;
 
   if (isSameOrigin) {
+    // Network first — always try to get fresh content
+    // Fall back to cache only when offline
     event.respondWith(
-      caches.match(event.request).then(cached => {
-        if (cached) return cached;
-        return fetch(event.request).then(response => {
+      fetch(event.request)
+        .then(response => {
           const clone = response.clone();
           caches.open(CACHE).then(cache => cache.put(event.request, clone));
           return response;
-        });
-      })
+        })
+        .catch(() => caches.match(event.request))
     );
   } else {
+    // External resources — network only, fail silently
     event.respondWith(
       fetch(event.request).catch(() => new Response('', { status: 408 }))
     );
