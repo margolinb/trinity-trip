@@ -384,9 +384,106 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
   font-size:12px; font-weight:600;
   text-align:center; padding:7px;
 }
+
+  /* ── PIN Gate ── */
+  .pin-gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--forest);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 40px 24px;
+  }
+  .pin-gate h1 {
+    font-family: Georgia, serif;
+    font-size: 26px; font-weight: normal;
+    color: #fff; margin-bottom: 6px;
+    text-align: center;
+  }
+  .pin-gate p {
+    font-family: system-ui, sans-serif;
+    font-size: 13px; color: rgba(255,255,255,.55);
+    margin-bottom: 32px; text-align: center;
+  }
+  .pin-dots {
+    display: flex; gap: 14px; margin-bottom: 36px;
+  }
+  .pin-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.4);
+    background: transparent;
+    transition: background .15s, border-color .15s;
+  }
+  .pin-dot.filled {
+    background: var(--sand);
+    border-color: var(--sand);
+  }
+  .pin-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 72px);
+    gap: 12px;
+  }
+  .pin-btn {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.2);
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    font-family: system-ui, sans-serif;
+    font-size: 22px; font-weight: 300;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .12s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pin-btn:active { background: rgba(255,255,255,.22); }
+  .pin-btn.delete { font-size: 18px; }
+  .pin-btn.empty { visibility: hidden; }
+  .pin-shake {
+    animation: shake .35s ease;
+  }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-8px)}
+    40%{transform:translateX(8px)}
+    60%{transform:translateX(-6px)}
+    80%{transform:translateX(6px)}
+  }
+  .pin-error {
+    font-family: system-ui, sans-serif;
+    font-size: 12px; color: #FCA5A5;
+    margin-top: -24px; margin-bottom: 20px;
+    min-height: 18px; text-align: center;
+  }
 </style>
 </head>
 <body>
+
+<div class="pin-gate" id="pin-gate">
+  <h1>🌲 Trinity River Vista</h1>
+  <p>Enter PIN to continue</p>
+  <div class="pin-dots" id="pin-dots">
+    <div class="pin-dot" id="d0"></div>
+    <div class="pin-dot" id="d1"></div>
+    <div class="pin-dot" id="d2"></div>
+    <div class="pin-dot" id="d3"></div>
+  </div>
+  <div class="pin-error" id="pin-error"></div>
+  <div class="pin-pad">
+    <button class="pin-btn" onclick="pinPress('1')">1</button>
+    <button class="pin-btn" onclick="pinPress('2')">2</button>
+    <button class="pin-btn" onclick="pinPress('3')">3</button>
+    <button class="pin-btn" onclick="pinPress('4')">4</button>
+    <button class="pin-btn" onclick="pinPress('5')">5</button>
+    <button class="pin-btn" onclick="pinPress('6')">6</button>
+    <button class="pin-btn" onclick="pinPress('7')">7</button>
+    <button class="pin-btn" onclick="pinPress('8')">8</button>
+    <button class="pin-btn" onclick="pinPress('9')">9</button>
+    <button class="pin-btn empty"></button>
+    <button class="pin-btn" onclick="pinPress('0')">0</button>
+    <button class="pin-btn delete" onclick="pinDel()">⌫</button>
+  </div>
+</div>
 
 <div class="offline-bar"><b>Works offline</b> — all content saved in this file</div>
 
@@ -1301,6 +1398,56 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
 </div><!-- /page -->
 
 <script>
+// ── PIN Gate ─────────────────────────────────────────
+const PIN = '1172';
+let pinEntry = '';
+
+function pinPress(d) {
+  if (pinEntry.length >= 4) return;
+  pinEntry += d;
+  updateDots();
+  if (pinEntry.length === 4) {
+    setTimeout(checkPin, 120);
+  }
+}
+
+function pinDel() {
+  pinEntry = pinEntry.slice(0, -1);
+  document.getElementById('pin-error').textContent = '';
+  updateDots();
+}
+
+function updateDots() {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('d' + i).classList.toggle('filled', i < pinEntry.length);
+  }
+}
+
+function checkPin() {
+  if (pinEntry === PIN) {
+    const gate = document.getElementById('pin-gate');
+    gate.style.transition = 'opacity .3s';
+    gate.style.opacity = '0';
+    setTimeout(() => gate.style.display = 'none', 300);
+    try { sessionStorage.setItem('trinity-auth', '1'); } catch(e) {}
+  } else {
+    document.getElementById('pin-dots').classList.add('pin-shake');
+    document.getElementById('pin-error').textContent = 'Incorrect PIN';
+    setTimeout(() => {
+      document.getElementById('pin-dots').classList.remove('pin-shake');
+      pinEntry = '';
+      updateDots();
+    }, 400);
+  }
+}
+
+// Skip gate if already authenticated this session
+try {
+  if (sessionStorage.getItem('trinity-auth') === '1') {
+    document.getElementById('pin-gate').style.display = 'none';
+  }
+} catch(e) {}
+
 // Toggle accordion cards
 function tog(hd){
   hd.closest('.card').classList.toggle('open');
