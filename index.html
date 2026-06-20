@@ -286,14 +286,26 @@ h3.sub{
   border-radius:3px; padding:2px 7px;
 }
 .card-meta .rating{
-  background:#FEF3C7;
-  border:1px solid #F59E0B;
-  color:#92400E;
-  font-weight:700;
-  font-size:12px;
-  padding:2px 8px;
-  border-radius:3px;
+  display:none; /* ratings moved to card footer links */
 }
+a.grating{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  background:#FEF3C7;
+  border:1px solid #D97706;
+  color:#92400E;
+  font-family:system-ui,sans-serif;
+  font-size:12px;
+  font-weight:700;
+  padding:4px 10px;
+  border-radius:4px;
+  text-decoration:none;
+  margin:6px 2px 2px 0;
+}
+a.grating:hover{background:#FDE68A}
+a.grating .stars{color:#D97706; letter-spacing:-.5px}
+a.grating .count{font-weight:400; opacity:.75}
 .card p{margin-bottom:6px; color:var(--ink)}
 .card p strong{color:var(--forest)}
 
@@ -728,11 +740,12 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>1 Main St, Winters</span><span>~1 hr from SF</span><span>Off I-505</span><span class="rating">4.4★ TripAdvisor (295 reviews) · #1 in Winters</span><span>Daily 8am–8pm (Wed closes 3pm)</span></div>
+      <div class="card-meta"><span>1 Main St, Winters</span><span>~1 hr from SF</span><span>Off I-505</span><span>Daily 8am–8pm (Wed closes 3pm)</span></div>
       <p>A beloved local institution in the tiny downtown of Winters, just off I-505. Over 35 years in business, family-owned, genuine Central Valley roadhouse energy. Big breakfasts served until mid-afternoon — huevos rancheros, chicken and waffles, baked French toast. Sandwiches and soups for lunch. Sit outside on the main street and watch the town go by.</p>
       <p><strong>Best if:</strong> You leave SF by 8–9am. Pairs well with live music on Main St (Fridays April–October). A worthwhile detour for an early, unhurried start.</p>
       <a class="tel" href="tel:15307952682">📞 530-795-2682</a>
       <a class="map" href="https://maps.apple.com/?q=Putah+Creek+Cafe+Winters+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Putah+Creek+Cafe+Winters+CA" target="_blank"><span class="stars">★</span> 4.4 <span class="count">(295+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -742,10 +755,11 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>1712 Churn Creek Rd</span><span>~3.5 hrs from SF</span><span class="rating">4.6★ / 960+ reviews (Google)</span><span>Mon–Sat 11am–7pm</span></div>
+      <div class="card-meta"><span>1712 Churn Creek Rd</span><span>~3.5 hrs from SF</span><span>Mon–Sat 11am–7pm</span></div>
       <p>Redding's most beloved lunch spot — consistently fresh, healthy, affordable. Buddha bowls, falafel, hot dogs, onion rings. No detour required, easy in-and-out. Best straight lunch stop on the route.</p>
       <a class="tel" href="tel:15307229181">📞 530-722-9181</a>
       <a class="map" href="https://maps.apple.com/?q=Wilda's+Grill+Redding+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Wilda's+Grill+Redding+CA" target="_blank"><span class="stars">★</span> 4.6 <span class="count">(960+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -755,11 +769,12 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>826 Sundial Bridge Dr</span><span class="rating">4.1★ Google · 4.2★ Restaurant Guru (2,660 reviews)</span><span>Daily 6:30am–9/10pm</span></div>
+      <div class="card-meta"><span>826 Sundial Bridge Dr</span><span>Daily 6:30am–9/10pm</span></div>
       <p>Modern California cuisine right next to the iconic glass Sundial Bridge over the Sacramento River. Wood-fired pizzas, fresh salads, brick oven dishes, craft beer, outdoor heated patio. The food is solid rather than spectacular — this is as much about walking the bridge and stretching your legs as it is about the meal. Dog-friendly, kid-friendly.</p>
       <p><strong>Best if:</strong> You want a scenic sit-down experience and the chance to walk off the drive before hitting the mountain roads.</p>
       <a class="tel" href="tel:15303193456">📞 530-319-3456</a>
       <a class="map" href="https://maps.apple.com/?q=Mosaic+Restaurant+Redding+CA+Sundial+Bridge">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Mosaic+Restaurant+Redding+CA+Sundial+Bridge" target="_blank"><span class="stars">★</span> 4.1 <span class="count">(900+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -769,11 +784,12 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>1257 Oregon St</span><span class="rating">4.4★ TripAdvisor (300 reviews) · #4 of 216 in Redding</span><span>Tue–Sun 11am–9/10pm · Closed Mon</span></div>
+      <div class="card-meta"><span>1257 Oregon St</span><span>Tue–Sun 11am–9/10pm · Closed Mon</span></div>
       <p>Redding's best craft brewpub. Family-owned, three-man passion project that became a local institution. Award-winning house ales and lagers — German Pilsner, Apricot Wheat, Chocolate Cherry Stout. Food punches well above pub standards: hand-rolled tater tots, Philly cheese steak, California chicken burger, gourmet mac and cheese. Spacious dog-friendly outdoor patio.</p>
       <p><strong>Best if:</strong> You appreciate craft beer and want a proper pub lunch with serious food. A genuine Redding highlight.</p>
       <a class="tel" href="tel:15307681034">📞 530-768-1034</a>
       <a class="map" href="https://maps.apple.com/?q=Woody's+Brewing+Company+Redding+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Woody's+Brewing+Company+Redding+CA" target="_blank"><span class="stars">★</span> 4.4 <span class="count">(830+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -826,7 +842,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>1401 Hilltop Dr</span><span class="rating">4.4★ / 800+ reviews</span><span>Daily 7am–10pm</span></div>
+      <div class="card-meta"><span>1401 Hilltop Dr</span><span>Daily 7am–10pm</span></div>
       <p>The best grocery option in Redding. Highly praised meat department, organic produce, great staff. If you're skipping Vacaville, do your main shop here.</p>
       <a class="tel" href="tel:15309990988">📞 530-999-0988</a>
       <a class="map" href="https://maps.apple.com/?q=Sprouts+Farmers+Market+Redding+CA">📍 Map</a>
@@ -887,7 +903,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>2383 Trinity River Hwy</span><span class="rating">4.8★</span><span>Free</span></div>
+      <div class="card-meta"><span>2383 Trinity River Hwy</span><span>Free</span></div>
       <p>Parking, bathrooms, easy river access. Good for floating, tubing, rock jumping. Current can pick up in the main channel — stay aware of where it strengthens.</p>
       <p><strong>Best for:</strong> Monday evening after check-in. Closest swim to the house.</p>
       <a class="map" href="https://maps.apple.com/?q=Big+Rock+Day+Use+Area+Willow+Creek+CA">📍 Map</a>
@@ -900,7 +916,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>151 Kimtu Rd, Willow Creek</span><span>$5 honor parking</span><span class="rating">4.4★</span></div>
+      <div class="card-meta"><span>151 Kimtu Rd, Willow Creek</span><span>$5 honor parking</span></div>
       <p>The local classic. Rocky banks, cold deep water, and a cliff about 20 feet up that most people make at least one jump from. Draws a crowd in summer — go early or on a weekday.</p>
       <p><strong>Also the put-in</strong> for the classic Kimtu → Big Rock float (60–90 min, described below).</p>
       <a class="tel" href="tel:17072983627">📞 707-298-3627</a>
@@ -926,7 +942,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>20 min north on Hwy 96</span><span class="rating">4.8★</span></div>
+      <div class="card-meta"><span>20 min north on Hwy 96</span></div>
       <p>Operated by the Hoopa Valley Tribe. Shaded campground right on the river with both shallow wading spots and deep swimming pools. Sauna and showers on site. A calmer, less crowded feel than the Willow Creek spots.</p>
       <p><strong>Good option</strong> for checkout morning — a final dip before the drive home.</p>
       <a class="map" href="https://maps.apple.com/?q=Tish+Tang+Campground+Hoopa+CA">📍 Map</a>
@@ -998,7 +1014,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>~40 min from house</span><span>~9 mi RT to falls</span><span>Moderate–Hard</span><span class="rating">4.9★</span></div>
+      <div class="card-meta"><span>~40 min from house</span><span>~9 mi RT to falls</span><span>Moderate–Hard</span></div>
       <p>The standout hike of the trip. Drive Hwy 299 east to Junction City, then Canyon Creek Road north 13 miles to the trailhead. The canyon is massive white granite, the waterfalls are genuinely dramatic — Lower Falls at mile 3.9, Middle Falls at 4.9. One of the best day hikes in Northern California.</p>
       <p><strong>Start by 8am.</strong> The switchbacks around mile 2.5 are fully exposed — brutal after 11am. Bring at least 2L of water per person. Don't leave food in the car; bears break into vehicles at this trailhead regularly.</p>
       <p><strong>Shorter option:</strong> Turn around at Lower Falls for an excellent ~8 mi day.</p>
@@ -1072,11 +1088,12 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>20811 CA-299, Salyer</span><span class="rating">4.8★ Google</span><span>~5 min from house</span><span>Mon–Wed 4pm–midnight</span><span>Thu–Fri 2pm</span><span>Sat–Sun noon</span></div>
+      <div class="card-meta"><span>20811 CA-299, Salyer</span><span>~5 min from house</span><span>Mon–Wed 4pm–midnight</span><span>Thu–Fri 2pm</span><span>Sat–Sun noon</span></div>
       <p>Closest bar and grill to the house by a long shot — hidden gem right on 299 in Salyer. Friendly local crowd, huge portions, good burgers and the "Trinity fish." Outdoor summer seating. The kind of place you only find if you're already staying nearby.</p>
       <p><strong>Good for:</strong> First night drinks, an easy dinner when you don't want to drive to Willow Creek.</p>
       <a class="tel" href="tel:15306293899">📞 530-629-3899</a>
       <a class="map" href="https://maps.apple.com/?q=The+Rock+Slide+Bar+Grill+Salyer+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Rock+Slide+Bar+Grill+Salyer+CA" target="_blank"><span class="stars">★</span> 4.8 <span class="count">(60+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -1102,11 +1119,12 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>39010 CA-299</span><span class="rating">4.8★ Google / 4.9★ Yelp</span><span>Daily 8am–3pm</span></div>
+      <div class="card-meta"><span>39010 CA-299</span><span>Daily 8am–3pm</span></div>
       <p>The best stop in town. An organic café with real care behind it — fresh-made sandwiches, smoothies, excellent espresso, chocolate chip cookies the size of your face. Goes well with a morning swim plan: coffee and a wrap, then head to the river.</p>
       <p><strong>Order:</strong> Turkey wrap, strawberry haze smoothie.</p>
       <a class="tel" href="tel:17072968026">📞 707-296-8026</a>
       <a class="map" href="https://maps.apple.com/?q=Osprey+Cafe+Willow+Creek+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Osprey+Cafe+Willow+Creek+CA" target="_blank"><span class="stars">★</span> 4.8 <span class="count">(110+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -1116,11 +1134,12 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>19 Willow Way</span><span class="rating">4.2★ Google</span><span>Mon–Thu 11am–8pm · Fri–Sun 9am–9pm</span></div>
+      <div class="card-meta"><span>19 Willow Way</span><span>Mon–Thu 11am–8pm · Fri–Sun 9am–9pm</span></div>
       <p>The place to go for a proper dinner out. Steaks, prawns, burgers — the sirloin and mashed potatoes get mentioned by nearly every reviewer. Bigfoot artifacts everywhere; feels exactly like it should for this town.</p>
       <p><strong>Best after:</strong> Canyon Creek hike day. You'll have earned it.</p>
       <a class="tel" href="tel:15307392614">📞 530-739-2614</a>
       <a class="map" href="https://maps.apple.com/?q=Bigfoot+Steakhouse+Willow+Creek+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Bigfoot+Steakhouse+Willow+Creek+CA" target="_blank"><span class="stars">★</span> 4.2 <span class="count">(200+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -1130,11 +1149,12 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>38939 CA-299</span><span class="rating">4.3★ Google</span></div>
+      <div class="card-meta"><span>38939 CA-299</span></div>
       <p>Solid pub food with local character. Teriyaki salmon bowls, burgers, garlic herb fries that reviewers rave about, local draft beers and ciders. Plant-based options too.</p>
       <p><strong>Good for:</strong> Casual dinner or the last lunch before the drive home on Thursday.</p>
       <a class="tel" href="tel:15307688687">📞 530-768-8687</a>
       <a class="map" href="https://maps.apple.com/?q=Raging+Creek+Pub+Willow+Creek+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Raging+Creek+Pub+Willow+Creek+CA" target="_blank"><span class="stars">★</span> 4.3 <span class="count">(130+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -1144,10 +1164,11 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>38986 CA-299</span><span class="rating">4.5★ Google</span><span>Daily 11am–11pm</span><span>💵 Cash Only</span></div>
+      <div class="card-meta"><span>38986 CA-299</span><span>Daily 11am–11pm</span><span>💵 Cash Only</span></div>
       <p>A true local dive bar, and a good one. Stiff drinks, good beer, friendly regulars, live music some nights. Called "one of the best dive bars in America" by a Yelp reviewer, which feels about right. Bring cash.</p>
       <a class="tel" href="tel:15306292679">📞 530-629-2679</a>
       <a class="map" href="https://maps.apple.com/?q=Forks+Lounge+Willow+Creek+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Forks+Lounge+Willow+Creek+CA" target="_blank"><span class="stars">★</span> 4.5 <span class="count">(80+ Google reviews)</span></a>
     </div>
   </div>
   <div class="card">
@@ -1160,6 +1181,7 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <div class="card-meta"><span>~20 min east on Hwy 299</span></div>
       <p>Organic coffee roasted on-site, wood-fired pizza, and outdoor seating on the Trinity River bank. Worth the drive for something different — more remote and peaceful than downtown Willow Creek.</p>
       <a class="map" href="https://maps.apple.com/?q=Strawhouse+Cafe+Big+Flat+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Strawhouse+Cafe+Big+Flat+CA" target="_blank"><span class="stars">★</span> 4.4 <span class="count">(40+ Google reviews)</span></a>
     </div>
   </div>
 </div>
@@ -1173,10 +1195,11 @@ a.web-link{background:var(--sand-l); color:var(--forest)}
       <span class="card-arrow">▼</span>
     </div>
     <div class="card-body">
-      <div class="card-meta"><span>1712 Churn Creek Rd</span><span class="rating">4.6★ / 960+ reviews</span><span>Mon–Sat 11am–7pm</span></div>
+      <div class="card-meta"><span>1712 Churn Creek Rd</span><span>Mon–Sat 11am–7pm</span></div>
       <p>Redding's most beloved lunch spot. Fresh, healthy, affordable — Buddha bowls, falafel, excellent onion rings. Easy on the way home Thursday.</p>
       <a class="tel" href="tel:15307229181">📞 530-722-9181</a>
       <a class="map" href="https://maps.apple.com/?q=Wilda's+Grill+Redding+CA">📍 Map</a>
+      <a class="grating" href="https://www.google.com/maps/search/Wilda's+Grill+Redding+CA" target="_blank"><span class="stars">★</span> 4.6 <span class="count">(960+ Google reviews)</span></a>
     </div>
   </div>
 </div>
