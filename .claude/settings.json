@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -o 'location\\\\.hash\\){const o=location\\\\.href\\\\.split\\(\"#\"\\);s\\\\.value=o\\\\[1\\\\],history\\\\.replaceState\\(null,\"\",o\\\\[0\\\\]\\)}' /Users/brianmargolin/Desktop/Trinity/trinity-trip/index.html)",
+      "Bash(python3 -)"
+    ]
+  }
+}
