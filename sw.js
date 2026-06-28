@@ -1,4 +1,4 @@
-const CACHE = 'trinity-trip-v5';
+const CACHE = 'trinity-trip-v6';
 
 self.addEventListener('install', event => {
   self.skipWaiting();
