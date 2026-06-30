@@ -19,9 +19,11 @@ self.addEventListener('fetch', event => {
 
   if (isSameOrigin) {
     // Network first — always try to get fresh content
+    // cache:'reload' bypasses the HTTP cache so GitHub Pages' max-age=600
+    // header can't serve a stale copy from disk before the SW even runs
     // Fall back to cache only when offline
     event.respondWith(
-      fetch(event.request)
+      fetch(event.request, { cache: 'reload' })
         .then(response => {
           const clone = response.clone();
           caches.open(CACHE).then(cache => cache.put(event.request, clone));
